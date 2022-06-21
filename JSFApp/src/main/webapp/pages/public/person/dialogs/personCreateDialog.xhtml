@@ -12,6 +12,9 @@
 			<h:panelGrid columns="2">
 				<h:outputText value="* #{bundle.personName}" />
 				<p:inputText value="#{personBean.person.name}" required="true" label="#{bundle.personName}" />
+
+				<h:outputText value="* #{bundle.personAge}" />
+				<p:inputText value="#{personBean.person.age}" required="true" label="#{bundle.personAge}" />
 		
 				<p:commandButton id="saveBtn" value="#{bundle.create}" icon="pi pi-plus"
 					action="#{personBean.createPerson()}"
