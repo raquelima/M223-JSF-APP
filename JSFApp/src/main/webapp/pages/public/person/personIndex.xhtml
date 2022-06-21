@@ -48,6 +48,11 @@
                                          action="#{personBean.editPersonLanguages()}">
                             <f:setPropertyActionListener target="#{personBean.person}" value="#{person}"/>
                         </p:commandButton>
+                        <p:spacer width="10px"/>
+                        <p:commandButton value="#{bundle.hobbyPlural}" icon="pi pi-pencil" ajax="false"
+                                         action="#{personBean.editPersonHobbies()}">
+                            <f:setPropertyActionListener target="#{personBean.person}" value="#{person}"/>
+                        </p:commandButton>
                     </p:column>
 
                 </p:dataTable>

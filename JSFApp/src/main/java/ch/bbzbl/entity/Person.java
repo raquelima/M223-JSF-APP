@@ -3,12 +3,7 @@ package ch.bbzbl.entity;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
 
 @Entity
 @NamedQuery(name = "Person.findPersonByIdWithLanguages", query = "select p from Person p left join fetch p.languages where p.id = :personId")
@@ -22,6 +17,11 @@ public class Person implements Serializable {
 	private int id;
 	private String name;
 	private int age;
+
+	@ManyToOne
+	@JoinColumn(name = "hobby", foreignKey = @javax.persistence.ForeignKey(name = "hobby_fk"))
+	private Hobby hobby;
+
 	@ManyToMany
 	private List<Language> languages;
 
@@ -55,6 +55,14 @@ public class Person implements Serializable {
 
 	public void setLanguages(List<Language> languages) {
 		this.languages = languages;
+	}
+
+	public Hobby getHobby() {
+		return hobby;
+	}
+
+	public void setHobby(Hobby hobby) {
+		this.hobby = hobby;
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import ch.bbzbl.entity.Hobby;
 import com.sun.faces.context.flash.ELFlash;
 
 import ch.bbzbl.entity.Language;
@@ -25,6 +26,9 @@ public class PersonBean extends AbstractBean implements Serializable {
 	private Person person;
 	private Person personWithLanguages;
 	private Person personWithLanguagesForDetail;
+
+
+	private Hobby hobby;
 
 	@ManagedProperty(value="#{languageBean}")
 	private LanguageBean languageBean;
@@ -134,6 +138,11 @@ public class PersonBean extends AbstractBean implements Serializable {
 		return "/pages/public/person/personLanguages/personLanguages.xhtml";
 	}
 
+	public String editPersonHobbies() {
+		ELFlash.getFlash().put(SELECTED_PERSON, person);
+		return "/pages/public/person/personHobbies/personHobbies.xhtml";
+	}
+
 	public PersonFacade getPersonFacade() {
 		if (personFacade == null) {
 			personFacade = new PersonFacade();
@@ -203,4 +212,23 @@ public class PersonBean extends AbstractBean implements Serializable {
 	private void reloadPersonWithLanguages() {
 		personWithLanguages = getPersonFacade().findPersonWithAllLanguages(person.getId());
 	}
+
+	public Hobby getHobby() {
+		if (hobby == null) {
+			hobby = new Hobby();
+		}
+
+		return hobby;
+	}
+
+	public void setHobby(Hobby hobby) {
+		this.hobby = hobby;
+	}
+
+	public void resetHobby() {
+		hobby = new Hobby();
+	}
+
+
+
 }
