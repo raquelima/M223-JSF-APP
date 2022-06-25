@@ -5,16 +5,16 @@
 	<p:dialog widgetVar="personAddHobbyDialogWidget" id="personAddHobbyDialogId" height="150" width="500" modal="true" closable="true" draggable="false"
 		resizable="false">
 		<h:form id="personAddHobbyDialogForm" prependId="false">
-			#{bundle.personAddHobbyTo}: <h:outputText value="#{personBean.person.name}" />
+			#{bundle.personAddHobbyTo}: <h:outputText value="#{personBean.personWithLanguages.name}" />
 			<br />
-            <p:autoComplete forceSelection="true" value="#{hobbyBean.allHobbies}" label="#{bundle.hobby}" required="true" var="hobby"
-				itemLabel="#{hobby.hobby}" itemValue="#{hobby}" dropdown="true" />
+            <p:autoComplete forceSelection="true" value="#{personBean.hobby}" label="#{bundle.hobby}" required="true" var="hobby"
+				itemLabel="#{hobby.hobby}" itemValue="#{hobby}" completeMethod="#{personBean.getRemainingHobbies}" dropdown="true" />
 			<br />
 			<br />
 
-			<p:commandButton value="#{bundle.add}" icon="pi pi-plus" action="#{personBean.setHobby(hobby)}" update=":messageGrowl :personsForm:personsTable"
-				oncomplete="closeDialogIfSucess(xhr, status, args,PF('personAddLanguageDialogWidget'), 'personAddLanguageDialogId')" />
-			<p:commandButton value="#{bundle.cancel}" icon="pi pi-ban" onclick="PF('personAddLanguageDialogWidget').hide()" type="button" />
+			<p:commandButton value="#{bundle.add}" icon="pi pi-plus" action="#{personBean.addHobbyToPerson()}" update=":messageGrowl :hobbyForm:hobbyTable"
+				oncomplete="closeDialogIfSucess(xhr, status, args,PF('personAddHobbyDialogWidget'), 'personAddHobbyDialogId')" />
+			<p:commandButton value="#{bundle.cancel}" icon="pi pi-ban" onclick="PF('personAddHobbyDialogWidget').hide()" type="button" />
 		</h:form>
 	</p:dialog>
 </h:body>

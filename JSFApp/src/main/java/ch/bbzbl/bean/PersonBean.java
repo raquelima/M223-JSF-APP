@@ -27,11 +27,16 @@ public class PersonBean extends AbstractBean implements Serializable {
 	private Person personWithLanguages;
 	private Person personWithLanguagesForDetail;
 
-
 	private Hobby hobby;
+
+	private Person personWithHobby;
+
 
 	@ManagedProperty(value="#{languageBean}")
 	private LanguageBean languageBean;
+
+	@ManagedProperty(value="#{hobbyBean}")
+	private HobbyBean hobbyBean;
 	
 
 	private List<Person> persons;
@@ -79,9 +84,51 @@ public class PersonBean extends AbstractBean implements Serializable {
 		}
 	}
 
+	public void setPersonWithLanguages(Person personWithLanguages) {
+		this.personWithLanguages = personWithLanguages;
+	}
+
+	public LanguageBean getLanguageBean() {
+		return languageBean;
+	}
+
+	public HobbyBean getHobbyBean() {
+		return hobbyBean;
+	}
+
+	public void setHobbyBean(HobbyBean hobbyBean) {
+		this.hobbyBean = hobbyBean;
+	}
+
+	public List<Person> getPersons() {
+		return persons;
+	}
+
+	public void setPersons(List<Person> persons) {
+		this.persons = persons;
+	}
+
+	public void setPersonFacade(PersonFacade personFacade) {
+		this.personFacade = personFacade;
+	}
+
 	public void addLanguageToPerson() {
 		try {
 			getPersonFacade().addLanguageToPerson(language.getId(), personWithLanguages.getId());
+			closeDialog();
+			displayInfoMessageToUser("Added with success");
+			reloadPersonWithLanguages();
+			resetLanguage();
+		} catch (Exception e) {
+			keepDialogOpen();
+			displayErrorMessageToUser("A problem occurred while saving. Try again later");
+			e.printStackTrace();
+		}
+	}
+
+	public void addHobbyToPerson() {
+		try {
+			getPersonFacade().addHobbyToPerson(hobby.getId(), personWithLanguages.getId());
 			closeDialog();
 			displayInfoMessageToUser("Added with success");
 			reloadPersonWithLanguages();
@@ -114,6 +161,15 @@ public class PersonBean extends AbstractBean implements Serializable {
 		}
 
 		return personWithLanguages;
+	}
+
+	public Person getPersonWithHobbies() {
+		if (personWithHobby == null) {
+			person = (Person) ELFlash.getFlash().get(SELECTED_PERSON);
+			personWithHobby = getPersonFacade().findPersonWithAllLanguages(person.getId());
+		}
+
+		return personWithHobby;
 	}
 
 	public void setPersonWithLanguagesForDetail(Person person) {
@@ -185,6 +241,18 @@ public class PersonBean extends AbstractBean implements Serializable {
 		return res;
 	}
 
+	public List<Hobby> getRemainingHobbies(String name) {
+		//get all hobbies as copy
+		List<Hobby> res = new ArrayList<Hobby>(this.hobbyBean.getAllHobbies());
+		res.removeIf(l -> l.getHobby().toLowerCase().contains(name.toLowerCase()) == false);
+		return res;
+	}
+
+	public List<Hobby> getAllHobbiesForDropdown() {
+		List<Hobby> hobbies = new ArrayList<Hobby>(this.hobbyBean.getAllHobbies());
+		return hobbies;
+	}
+
 	private void loadPersons() {
 		persons = getPersonFacade().listAll();
 	}
@@ -211,6 +279,10 @@ public class PersonBean extends AbstractBean implements Serializable {
 
 	private void reloadPersonWithLanguages() {
 		personWithLanguages = getPersonFacade().findPersonWithAllLanguages(person.getId());
+	}
+
+	private void reloadPersonWithHobbies() {
+		personWithHobby = getPersonFacade().findPersonWithAllLanguages(person.getId());
 	}
 
 	public Hobby getHobby() {

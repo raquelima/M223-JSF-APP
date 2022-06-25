@@ -8,7 +8,7 @@
 			#{bundle.personRemoveHobbyFrom}: <h:outputText value="#{personBean.hobby.hobby}" />
 			<br />
 			<br />
-			<p:commandButton value="#{bundle.remove}" icon="pi pi-trash" action="#{personBean.resetHobby()}" update=":messageGrowl :personsForm:personsTable"
+			<p:commandButton value="#{bundle.remove}" icon="pi pi-trash" action="#{personBean.resetHobby()}" update=":messageGrowl :hobbyForm:hobbyTable"
 				oncomplete="closeDialogIfSucess(xhr, status, args, PF('personRemoveLanguageDialogWidget'), 'personRemoveLanguageDialogId')" />
 			<p:commandButton value="#{bundle.cancel}" icon="pi pi-ban" onclick="PF('personRemoveLanguageDialogWidget').hide()" type="button" />
 		</h:form>

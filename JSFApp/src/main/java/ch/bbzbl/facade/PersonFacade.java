@@ -65,6 +65,13 @@ public class PersonFacade implements Serializable {
 		return person;
 	}
 
+	public Person findPersonWithAllHobbies(int personId) {
+		EntityManagerHelper.beginTransaction();
+		Person person = personDAO.findPersonWithAllLanguages(personId);
+		EntityManagerHelper.commitAndCloseTransaction();
+		return person;
+	}
+
 	public void addLanguageToPerson(int languageId, int personId) {
 		EntityManagerHelper.beginTransaction();
 		Language language = languageDAO.find(languageId);
