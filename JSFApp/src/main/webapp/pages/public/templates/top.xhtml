@@ -13,8 +13,10 @@
 					<h:graphicImage library="images" name="logo.png" />
 				</h:commandLink>
 			Welcome to JSF
+				<h:commandButton  id="changeMode" value="Mode" action="#{userBean.switchMode()}" type="submit"/>
 			</h:form>
 		</div>
 	</ui:composition>
+
 </h:body>
 </html>

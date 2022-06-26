@@ -1,10 +1,13 @@
 package ch.bbzbl.bean;
 
+import ch.bbzbl.entity.Person;
 import ch.bbzbl.entity.User;
+import ch.bbzbl.facade.UserFacade;
 
 import javax.faces.bean.ManagedBean;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 
 @SessionScoped
@@ -23,7 +26,23 @@ public class UserBean implements Serializable {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/pages/public/login.xhtml";
     }
+
+    public void switchMode() {
+        UserFacade userFacade = new UserFacade();
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest)
+
+                context.getExternalContext().getRequest();
+
+        User name = request.getSession().getAttribute("user");
+        userFacade.updateUser(name);
+        name.setDarkMode(!name.getDarkMode());
+
+    }
     public User getUser() {
+        if (user == null) {
+            user = new User();
+        }
         return user;
     }
 
