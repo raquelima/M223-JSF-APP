@@ -1,5 +1,8 @@
 package ch.bbzbl.dao;
 
+import ch.bbzbl.entity.Person;
+import ch.bbzbl.entity.User;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -80,5 +83,16 @@ abstract class GenericDAO<T> implements Serializable {
 		for (Entry<String, Object> entry : parameters.entrySet()) {
 			query.setParameter(entry.getKey(), entry.getValue());
 		}
+	}
+
+	public User findUser(String username, String password) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT a from User a where a.name LIKE :username AND a.password LIKE :password", User.class);
+		query.setParameter("username", username);
+		query.setParameter("password", password);
+		List<User> users = query.getResultList();
+
+		return users.get(0);
+
 	}
 }
