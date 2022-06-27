@@ -22,6 +22,7 @@ body {
 	width: 100%;
 	height: 100%;
 	color: white;
+	background: #3b3b3b;
 }
 
 h1 {
@@ -99,9 +100,11 @@ a:link, a:visited, a:hover, a:active {
 }
 #divLeft .ui-widget-header {
 	background: #3b3b3b;
+	color: white;
 }
 #divLeft .ui-widget-header ui-corner-all {
 	background: #3b3b3b;
+	color: white;
 }
 #divMain {
 	padding: 0;
