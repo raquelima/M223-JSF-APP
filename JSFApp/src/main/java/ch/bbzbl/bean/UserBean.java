@@ -28,6 +28,14 @@ public class UserBean implements Serializable {
         return getUser().isAdmin();
     }
 
+    public String styling() {
+        if (getUser().getDarkMode()) {
+            return "darkmode.css";
+        } else  {
+            return "main.css";
+        }
+    }
+
     public boolean isDefaultUser() {
         return user.isUser();
     }
@@ -37,10 +45,11 @@ public class UserBean implements Serializable {
         return "/pages/public/login.xhtml";
     }
 
-    public void switchMode() {
+    public String switchMode() {
         UserFacade userFacade = new UserFacade();
         getUser().setDarkMode(!getUser().getDarkMode());
         userFacade.updateUser(getUser());
+        return "/pages/protected/index.xhtml";
     }
 
     public User getUser() {

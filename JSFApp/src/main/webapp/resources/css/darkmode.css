@@ -1,0 +1,141 @@
+#topMessage {
+	vertical-align: middle;
+	display: block;
+	font-size: 1.5em;
+	font-weight: bold;
+	line-height: 60px;
+}
+
+#topMessage img {
+	float: left;
+	margin-right: 20px;
+}
+
+html {
+	overflow: hidden;
+}
+
+body {
+	overflow: hidden;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	color: white;
+}
+
+h1 {
+	color: white;
+}
+
+
+a:link, a:visited, a:hover, a:active {
+	color: white;
+}
+
+.menuButton {
+	font-weight: bold;
+	font-size: 23px;
+	top: 10px;
+	bottom: 10px;
+
+}
+
+#divTop {
+	padding: 0;
+	padding-left: 10px;
+	padding-top: 5px;
+	margin: 0;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	right: 20px;
+	height: 80px;
+	overflow: hidden;
+	background: #3b3b3b;
+	border: 1px solid darkGray;
+	border-radius: 5px;
+	color: white;
+
+}
+
+#divTop .ui-panel-content {
+	padding-top: 5px;
+	padding-left: 0px;
+	background: #3b3b3b;
+	border: none;
+	color: white;
+	color: white;
+
+}
+
+#divLeft .ui-panel-content {
+	padding-top: 5px;
+	padding-left: 0px;
+	border: none;
+	color: white;
+
+}
+
+#divLeft {
+	display: block;
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	top: 100px;
+	left: 10px;
+	bottom: 20px;
+	overflow: auto;
+	width: 200px;
+	font-size: 23px;
+	color: white;
+
+}
+
+#divLeft .ui-menu {
+	width: 190px;
+	color: white;
+
+}
+#divLeft .ui-widget-header {
+	background: #3b3b3b;
+}
+#divLeft .ui-widget-header ui-corner-all {
+	background: #3b3b3b;
+}
+#divMain {
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	top: 100px;
+	left: 210px;
+	right: 20px;
+	bottom: 20px;
+	overflow: auto;
+}
+
+#divMain .ui-panel-content {
+	border: none;
+	padding-right: 0px;
+	color: white;
+}
+
+.ui-orderlist.langlist .ui-orderlist-list {
+	height: 80px;
+	color: white;
+}
+
+
+.ui-paginator {
+	background: transparent !important;
+}
+
+
+h3 {
+	color: white;
+}
+
+
+ul > li.ui-widget-header.ui-corner-all > h3 {
+	color: white;
+}
