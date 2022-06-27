@@ -45,11 +45,10 @@ public class UserBean implements Serializable {
         return "/pages/public/login.xhtml";
     }
 
-    public String switchMode() {
+    public void switchMode() {
         UserFacade userFacade = new UserFacade();
         getUser().setDarkMode(!getUser().getDarkMode());
         userFacade.updateUser(getUser());
-        return "/pages/protected/index.xhtml";
     }
 
     public User getUser() {
