@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import ch.bbzbl.entity.Hobby;
+import ch.bbzbl.facade.HobbyFacade;
 import com.sun.faces.context.flash.ELFlash;
 
 import ch.bbzbl.entity.Language;
@@ -25,6 +26,8 @@ public class PersonBean extends AbstractBean implements Serializable {
 	private Person person;
 	private Person personWithLanguages;
 	private Person personWithLanguagesForDetail;
+
+	private HobbyFacade hobbyFacade;
 
 	private Hobby hobby;
 
@@ -54,6 +57,7 @@ public class PersonBean extends AbstractBean implements Serializable {
 			e.printStackTrace();
 		}
 	}
+
 
 	public void updatePerson() {
 		try {
@@ -131,10 +135,24 @@ public class PersonBean extends AbstractBean implements Serializable {
 			closeDialog();
 			displayInfoMessageToUser("Added with success");
 			reloadPersonWithLanguages();
-			resetLanguage();
+			resetHobby();
 		} catch (Exception e) {
 			keepDialogOpen();
 			displayErrorMessageToUser("A problem occurred while saving. Try again later");
+			e.printStackTrace();
+		}
+	}
+
+	public void removeHobbyFromPerson() {
+		try {
+			getPersonFacade().removeHobbyFromPerson(personWithLanguages.getId());
+			closeDialog();
+			displayInfoMessageToUser("Removed with success");
+			reloadPersonWithLanguages();
+			resetHobby();
+		} catch (Exception e) {
+			keepDialogOpen();
+			displayErrorMessageToUser("A problem occurred while removing. Try again later");
 			e.printStackTrace();
 		}
 	}
@@ -171,6 +189,10 @@ public class PersonBean extends AbstractBean implements Serializable {
 		return personWithHobby;
 	}
 
+	public Hobby getPersonWithHobbiesHobby() {
+		return getHobbyFacade().findHobby(personWithHobby.getHobby().getId());
+	}
+
 	public void setPersonWithLanguagesForDetail(Person person) {
 		personWithLanguagesForDetail = getPersonFacade().findPersonWithAllLanguages(person.getId());
 	}
@@ -204,6 +226,14 @@ public class PersonBean extends AbstractBean implements Serializable {
 		}
 
 		return personFacade;
+	}
+
+	public HobbyFacade getHobbyFacade() {
+		if (hobbyFacade == null) {
+			hobbyFacade = new HobbyFacade();
+		}
+
+		return hobbyFacade;
 	}
 
 	public Person getPerson() {

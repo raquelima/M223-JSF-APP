@@ -4,9 +4,9 @@
 <h:body>
 	<ui:composition template="/pages/public/templates/master.xhtml">
 		<ui:define name="divMain">
-			<h3>#{bundle.personHobby}: <h:outputText value="#{personBean.personWithLanguages.name}" /></h3>
+			<h3>#{bundle.personHobby}: <h:outputText value="#{personBean.personWithHobbies.name}" /></h3>
 			<h:form id="hobbyForm">
-				<p:dataTable id="hobbyTable" emptyMessage="#{bundle.noRecords}" paginator="true" rows="10"
+				<p:dataTable id="hobbyTable" value="#{personBean.personWithHobbies.hobby}" var="hobby" emptyMessage="#{bundle.noRecords}" paginator="true" rows="10"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					rowsPerPageTemplate="5,10,15">
 					<p:column>
@@ -14,7 +14,7 @@
 							<h:outputText value="#{bundle.hobbyName}" />
 						</f:facet>
 
-						<h:outputText value="#{hobbyBean.hobby.hobby}" />
+						<h:outputText value="#{hobby.hobby}" />
 					</p:column>
 
 					<p:column>

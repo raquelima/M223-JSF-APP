@@ -2,15 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 <h:body>
-	<p:dialog widgetVar="personRemoveLanguageDialogWidget" id="personRemoveLanguageDialogId" height="150" width="500" modal="true" closable="true" draggable="false"
+	<p:dialog widgetVar="personRemoveHobbyDialogWidget" id="personRemoveHobbyDialogId" height="150" width="500" modal="true" closable="true" draggable="false"
 		resizable="false">
-		<h:form id="personRemoveLanguageDialogForm" prependId="false">
+		<h:form id="personRemoveHobbyDialogForm" prependId="false">
 			#{bundle.personRemoveHobbyFrom}: <h:outputText value="#{personBean.hobby.hobby}" />
 			<br />
 			<br />
-			<p:commandButton value="#{bundle.remove}" icon="pi pi-trash" action="#{personBean.resetHobby()}" update=":messageGrowl :hobbyForm:hobbyTable"
-				oncomplete="closeDialogIfSucess(xhr, status, args, PF('personRemoveLanguageDialogWidget'), 'personRemoveLanguageDialogId')" />
-			<p:commandButton value="#{bundle.cancel}" icon="pi pi-ban" onclick="PF('personRemoveLanguageDialogWidget').hide()" type="button" />
+			<p:commandButton value="#{bundle.remove}" icon="pi pi-trash" action="#{personBean.removeHobbyFromPerson()}" update=":messageGrowl :hobbyForm:hobbyTable"
+				oncomplete="closeDialogIfSucess(xhr, status, args, PF('personRemoveHobbyDialogWidget'), 'personRemoveHobbyDialogId')" />
+			<p:commandButton value="#{bundle.cancel}" icon="pi pi-ban" onclick="PF('personRemoveHobbyDialogWidget').hide()" type="button" />
 		</h:form>
 	</p:dialog>
 </h:body>

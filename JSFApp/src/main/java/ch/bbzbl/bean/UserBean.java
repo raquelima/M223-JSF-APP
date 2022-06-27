@@ -29,13 +29,7 @@ public class UserBean implements Serializable {
 
     public void switchMode() {
         UserFacade userFacade = new UserFacade();
-        FacesContext context = FacesContext.getCurrentInstance();
-        HttpServletRequest request = (HttpServletRequest)
-
-                context.getExternalContext().getRequest();
-
-        User name = request.getSession().getAttribute("user");
-        userFacade.updateUser(name);
+        User name = new User();
         name.setDarkMode(!name.getDarkMode());
 
     }
