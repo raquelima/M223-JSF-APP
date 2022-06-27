@@ -3,11 +3,7 @@ package ch.bbzbl.entity;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 
 @Entity
 public class Language implements Serializable{
@@ -18,6 +14,9 @@ public class Language implements Serializable{
 	private int id;
 	private String name;
 
+
+	@Version
+	private long version;
 	@ManyToMany(mappedBy="languages")
 	private List<Person> persons;
 
@@ -27,6 +26,14 @@ public class Language implements Serializable{
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
 	}
 
 	public String getName() {
