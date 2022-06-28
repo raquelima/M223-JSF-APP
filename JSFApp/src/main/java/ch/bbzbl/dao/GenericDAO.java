@@ -91,8 +91,9 @@ abstract class GenericDAO<T> implements Serializable {
 		query.setParameter("username", username);
 		query.setParameter("password", password);
 		List<User> users = query.getResultList();
-
-		return users.get(0);
-
+		if (users.size() > 0) {
+			return users.get(0);
+		}
+		return null;
 	}
 }
